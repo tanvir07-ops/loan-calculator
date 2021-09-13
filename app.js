@@ -1,11 +1,21 @@
 // listen for submit:
-document.getElementById("loan-form").addEventListener("submit",calculateResults);
+document.getElementById("loan-form").addEventListener("submit",function(e){
+   
+    // hide result:
+    document.getElementById("results").style.display = "none";
+    // show loader:
+    document.getElementById("loading").style.display = "block";
+
+    setTimeout(calculateResults,2000);
+
+    e.preventDefault();
+});
 
 // calculate-results:
-function calculateResults(e){
+function calculateResults(){
 // jehetu eita form tai form submit er sob by-default atrribute remove korte hobe!
   
-  e.preventDefault();
+
 //   ekhon jehetu amar form er submit button e click korlei output gula show korbe tai ei function er moddei amar baki sob element gula select korte hobe.
  
   const amount = document.getElementById("amount")
@@ -29,6 +39,11 @@ function calculateResults(e){
     monthlyPayment.value = monthly.toFixed(2);
     totalPayment.value = (monthly * calculatedPayments).toFixed(2);
     totalInterest.value = ((monthly * calculatedPayments)-principal).toFixed(2);
+
+     // display result:
+     document.getElementById("results").style.display = "block";
+     // hide loader:
+     document.getElementById("loading").style.display = "none";
   } else {
      showError()
     
@@ -40,6 +55,12 @@ function calculateResults(e){
 // showerror: jokhon keo kono kisu input nah diye ei form submit korbe tokhon jate error dekhay:
 
 function showError(){
+
+
+      // hide result:
+      document.getElementById("results").style.display = "none";
+      // hide loader:
+      document.getElementById("loading").style.display = "none";
 
     // create a div(karon amra error dekhate chaitesi bootstrap alert class er maddome ar ei alert class ti div er under ei thake tai div create korte hobe)
     const errorDiv = document.createElement("div")
